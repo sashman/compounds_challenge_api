@@ -71,4 +71,73 @@ defmodule CompoundsChallengeApi.CompoundsTest do
       assert %Ecto.Changeset{} = Compounds.change_compound(compound)
     end
   end
+
+  describe "assay_results" do
+    alias CompoundsChallengeApi.Compounds.AssayResult
+
+    @valid_attrs %{operator: "some operator", result: "some result", result_id: 42, target: "some target", unit: "some unit", value: 120.5}
+    @update_attrs %{operator: "some updated operator", result: "some updated result", result_id: 43, target: "some updated target", unit: "some updated unit", value: 456.7}
+    @invalid_attrs %{operator: nil, result: nil, result_id: nil, target: nil, unit: nil, value: nil}
+
+    def assay_result_fixture(attrs \\ %{}) do
+      {:ok, assay_result} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Compounds.create_assay_result()
+
+      assay_result
+    end
+
+    test "list_assay_results/0 returns all assay_results" do
+      assay_result = assay_result_fixture()
+      assert Compounds.list_assay_results() == [assay_result]
+    end
+
+    test "get_assay_result!/1 returns the assay_result with given id" do
+      assay_result = assay_result_fixture()
+      assert Compounds.get_assay_result!(assay_result.id) == assay_result
+    end
+
+    test "create_assay_result/1 with valid data creates a assay_result" do
+      assert {:ok, %AssayResult{} = assay_result} = Compounds.create_assay_result(@valid_attrs)
+      assert assay_result.operator == "some operator"
+      assert assay_result.result == "some result"
+      assert assay_result.result_id == 42
+      assert assay_result.target == "some target"
+      assert assay_result.unit == "some unit"
+      assert assay_result.value == 120.5
+    end
+
+    test "create_assay_result/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Compounds.create_assay_result(@invalid_attrs)
+    end
+
+    test "update_assay_result/2 with valid data updates the assay_result" do
+      assay_result = assay_result_fixture()
+      assert {:ok, %AssayResult{} = assay_result} = Compounds.update_assay_result(assay_result, @update_attrs)
+      assert assay_result.operator == "some updated operator"
+      assert assay_result.result == "some updated result"
+      assert assay_result.result_id == 43
+      assert assay_result.target == "some updated target"
+      assert assay_result.unit == "some updated unit"
+      assert assay_result.value == 456.7
+    end
+
+    test "update_assay_result/2 with invalid data returns error changeset" do
+      assay_result = assay_result_fixture()
+      assert {:error, %Ecto.Changeset{}} = Compounds.update_assay_result(assay_result, @invalid_attrs)
+      assert assay_result == Compounds.get_assay_result!(assay_result.id)
+    end
+
+    test "delete_assay_result/1 deletes the assay_result" do
+      assay_result = assay_result_fixture()
+      assert {:ok, %AssayResult{}} = Compounds.delete_assay_result(assay_result)
+      assert_raise Ecto.NoResultsError, fn -> Compounds.get_assay_result!(assay_result.id) end
+    end
+
+    test "change_assay_result/1 returns a assay_result changeset" do
+      assay_result = assay_result_fixture()
+      assert %Ecto.Changeset{} = Compounds.change_assay_result(assay_result)
+    end
+  end
 end

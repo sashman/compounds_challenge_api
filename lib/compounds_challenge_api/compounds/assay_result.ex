@@ -25,6 +25,7 @@ defmodule CompoundsChallengeApi.Compounds.AssayResult do
     assay_result
     |> cast(attrs, [:result_id, :target, :result, :operator, :value, :unit])
     |> validate_required([:result_id, :target, :result, :operator, :value, :unit])
+    |> foreign_key_constraint(:compound_id)
     |> unique_constraint(:result_id)
   end
 end

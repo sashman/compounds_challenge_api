@@ -56,7 +56,7 @@ defmodule CompoundsChallengeApi.Compounds do
   end
 
   def bulk_upload_compounds(records) do
-    Repo.insert_all(Compound, records)
+    Repo.insert_all(Compound, records, on_conflict: :nothing)
   end
 
   @doc """

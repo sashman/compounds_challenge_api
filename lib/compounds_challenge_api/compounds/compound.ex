@@ -3,15 +3,15 @@ defmodule CompoundsChallengeApi.Compounds.Compound do
   alias CompoundsChallengeApi.Compounds.AssayResult
   import Ecto.Changeset
 
+  @primary_key {:compound_id, :integer, []}
   schema "compounds" do
-    field :compound_id, :integer
     field :image_path, :string
     field :molecular_formula, :string
     field :molecular_weight, :float
     field :num_rings, :integer
     field :smiles, :string
     field :alogp, :float
-    has_many :assay_results, AssayResult
+    has_many :assay_results, AssayResult, foreign_key: :compound_id, references: :compound_id
 
     timestamps()
   end
@@ -35,5 +35,6 @@ defmodule CompoundsChallengeApi.Compounds.Compound do
       :num_rings,
       :image_path
     ])
+    |> unique_constraint(:compound_id)
   end
 end

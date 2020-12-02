@@ -35,7 +35,7 @@ defmodule CompoundsChallengeApi.Compounds do
       ** (Ecto.NoResultsError)
 
   """
-  def get_compound!(id), do: Repo.get!(Compound, id)
+  def get_compound!(id), do: Repo.get!(Compound |> preload([:assay_results]), id)
 
   @doc """
   Creates a compound.

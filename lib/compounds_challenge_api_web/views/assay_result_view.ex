@@ -11,12 +11,17 @@ defmodule CompoundsChallengeApiWeb.AssayResultView do
   end
 
   def render("assay_result.json", %{assay_result: assay_result}) do
-    %{id: assay_result.id,
+    mapped(assay_result)
+  end
+
+  def mapped(assay_result) do
+    %{
       result_id: assay_result.result_id,
       target: assay_result.target,
       result: assay_result.result,
       operator: assay_result.operator,
       value: assay_result.value,
-      unit: assay_result.unit}
+      unit: assay_result.unit
+    }
   end
 end

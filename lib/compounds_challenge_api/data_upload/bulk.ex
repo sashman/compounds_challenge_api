@@ -26,7 +26,8 @@ defmodule CompoundsChallengeApi.DataUpload.Bulk do
       end)
     end)
     |> Stream.map(&add_timestamps(&1, now))
-    |> Enum.map(&Compounds.create_assay_result(&1))
+    |> Enum.to_list()
+    |> Compounds.bulk_upload_assay_results()
   end
 
   defp parse_file(file) do

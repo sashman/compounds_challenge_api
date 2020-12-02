@@ -23,8 +23,9 @@ defmodule CompoundsChallengeApi.Compounds.AssayResult do
   @doc false
   def changeset(assay_result, attrs) do
     assay_result
-    |> cast(attrs, [:result_id, :target, :result, :operator, :value, :unit])
-    |> validate_required([:result_id, :target, :result, :operator, :value, :unit])
+    |> cast(attrs, [:result_id, :target, :compound_id, :result, :operator, :value, :unit])
+    |> validate_required([:result_id, :compound_id, :target, :result, :operator, :value, :unit])
+    |> assoc_constraint(:compound)
     |> foreign_key_constraint(:compound_id)
     |> unique_constraint(:result_id)
   end

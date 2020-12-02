@@ -9,7 +9,7 @@ defmodule CompoundsChallengeApi.Repo.Migrations.CreateAssayResults do
       add :operator, :string
       add :value, :float
       add :unit, :string
-      add :compound_id, references(:compounds, on_delete: :nothing)
+      add :compound_id, references(:compounds, on_delete: :nothing, type: :integer, column: :compound_id)
 
       timestamps()
     end

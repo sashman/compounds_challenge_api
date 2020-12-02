@@ -13,5 +13,7 @@ defmodule CompoundsChallengeApi.Repo.Migrations.CreateCompounds do
       timestamps()
     end
 
+    create unique_index(:compounds, [:compound_id])
+
   end
 end

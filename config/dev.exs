@@ -6,6 +6,7 @@ config :compounds_challenge_api, CompoundsChallengeApi.Repo,
   password: "postgres",
   database: "compounds_challenge_api_dev",
   hostname: "localhost",
+  port: 5433,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

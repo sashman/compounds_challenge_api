@@ -7,6 +7,7 @@ defmodule CompoundsChallengeApiWeb.Router do
 
   scope "/api", CompoundsChallengeApiWeb do
     pipe_through :api
+    resources "/compounds", CompoundController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development

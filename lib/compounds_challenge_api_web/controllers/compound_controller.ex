@@ -3,6 +3,7 @@ defmodule CompoundsChallengeApiWeb.CompoundController do
 
   alias CompoundsChallengeApi.Compounds
   alias CompoundsChallengeApi.Compounds.Compound
+  alias CompoundsChallengeApi.DataUpload.Bulk
 
   action_fallback CompoundsChallengeApiWeb.FallbackController
 
@@ -39,5 +40,12 @@ defmodule CompoundsChallengeApiWeb.CompoundController do
     with {:ok, %Compound{}} <- Compounds.delete_compound(compound) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  def bulk_upload(conn, %{"compounds" => file}) do
+    Bulk.upload_bulk_data(file)
+
+    conn
+    |> json("ok")
   end
 end

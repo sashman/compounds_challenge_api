@@ -55,6 +55,10 @@ defmodule CompoundsChallengeApi.Compounds do
     |> Repo.insert()
   end
 
+  def bulk_upload_compounds(records) do
+    Repo.insert_all(Compound, records)
+  end
+
   @doc """
   Updates a compound.
 

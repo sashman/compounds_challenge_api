@@ -7,6 +7,7 @@ defmodule CompoundsChallengeApiWeb.Router do
 
   scope "/api", CompoundsChallengeApiWeb do
     pipe_through :api
+    post "/compounds/bulk_upload", CompoundController, :bulk_upload
     resources "/compounds", CompoundController, except: [:new, :edit]
     resources "/assay_results", AssayResultController, except: [:new, :edit]
   end

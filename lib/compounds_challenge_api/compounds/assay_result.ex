@@ -1,15 +1,21 @@
 defmodule CompoundsChallengeApi.Compounds.AssayResult do
   use Ecto.Schema
+  alias CompoundsChallengeApi.Compounds.Compound
   import Ecto.Changeset
 
+  @primary_key {:result_id, :integer, []}
   schema "assay_results" do
     field :operator, :string
     field :result, :string
-    field :result_id, :integer
     field :target, :string
     field :unit, :string
     field :value, :float
-    field :compound_id, :id
+    field :compound_id, :integer
+
+    belongs_to :compound, Compound,
+      define_field: false,
+      foreign_key: :compound_id,
+      references: :compound_id
 
     timestamps()
   end
@@ -19,5 +25,6 @@ defmodule CompoundsChallengeApi.Compounds.AssayResult do
     assay_result
     |> cast(attrs, [:result_id, :target, :result, :operator, :value, :unit])
     |> validate_required([:result_id, :target, :result, :operator, :value, :unit])
+    |> unique_constraint(:result_id)
   end
 end

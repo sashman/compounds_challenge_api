@@ -93,6 +93,10 @@ defmodule CompoundsChallengeApi.Compounds do
     Repo.delete(compound)
   end
 
+  def delete_all_compounds() do
+    Repo.delete_all(Compound)
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking compound changes.
 
@@ -153,6 +157,10 @@ defmodule CompoundsChallengeApi.Compounds do
     %AssayResult{}
     |> AssayResult.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def bulk_upload_assay_results(records) do
+    Repo.insert_all(AssayResult, records)
   end
 
   @doc """

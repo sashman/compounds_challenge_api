@@ -17,11 +17,21 @@ defmodule CompoundsChallengeApiWeb.CompoundView do
       molecular_weight: compound.molecular_weight,
       molecular_formula: compound.molecular_formula,
       num_rings: compound.num_rings,
-      image_path: compound.image_path,
-      assay_results:
-        for assay_result <- compound.assay_results do
-          AssayResultView.mapped(assay_result)
-        end
+      image_path: compound.image_path
     }
+    |> append_assay_results(compound)
   end
+
+  defp append_assay_results(map, %{assay_results: assay_results})
+       when is_list(assay_results) do
+    Map.put(
+      map,
+      :assay_results,
+      for assay_result <- assay_results do
+        AssayResultView.mapped(assay_result)
+      end
+    )
+  end
+
+  defp append_assay_results(map, _), do: map
 end

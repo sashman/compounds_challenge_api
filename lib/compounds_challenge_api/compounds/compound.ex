@@ -1,5 +1,6 @@
 defmodule CompoundsChallengeApi.Compounds.Compound do
   use Ecto.Schema
+  alias CompoundsChallengeApi.Compounds.AssayResult
   import Ecto.Changeset
 
   schema "compounds" do
@@ -9,6 +10,8 @@ defmodule CompoundsChallengeApi.Compounds.Compound do
     field :molecular_weight, :float
     field :num_rings, :integer
     field :smiles, :string
+    field :alogp, :string
+    has_many :assay_results, AssayResult
 
     timestamps()
   end
@@ -16,7 +19,21 @@ defmodule CompoundsChallengeApi.Compounds.Compound do
   @doc false
   def changeset(compound, attrs) do
     compound
-    |> cast(attrs, [:compound_id, :smiles, :molecular_weight, :molecular_formula, :num_rings, :image_path])
-    |> validate_required([:compound_id, :smiles, :molecular_weight, :molecular_formula, :num_rings, :image_path])
+    |> cast(attrs, [
+      :compound_id,
+      :smiles,
+      :molecular_weight,
+      :molecular_formula,
+      :num_rings,
+      :image_path
+    ])
+    |> validate_required([
+      :compound_id,
+      :smiles,
+      :molecular_weight,
+      :molecular_formula,
+      :num_rings,
+      :image_path
+    ])
   end
 end

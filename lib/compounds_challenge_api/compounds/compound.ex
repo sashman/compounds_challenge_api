@@ -10,7 +10,7 @@ defmodule CompoundsChallengeApi.Compounds.Compound do
     field :molecular_weight, :float
     field :num_rings, :integer
     field :smiles, :string
-    field :alogp, :string
+    field :alogp, :float
     has_many :assay_results, AssayResult
 
     timestamps()

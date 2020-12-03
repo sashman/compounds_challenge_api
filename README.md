@@ -1,5 +1,22 @@
 # CompoundsChallengeApi
 
+# Live endpoints
+
+Get all compounds:
+```
+curl https://compounds-challenge-api.herokuapp.com/api/compounds
+```
+
+Get a single compound:
+```
+curl https://compounds-challenge-api.herokuapp.com/api/compounds/1442549
+```
+
+Get compound image:
+
+Visit https://compounds-challenge-api.herokuapp.com/images/1442549.png
+
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
